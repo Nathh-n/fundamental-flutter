@@ -6,7 +6,7 @@ final List<Product> dummyProducts = [
     name: 'Produk A',
     price: 10000,
     imageUrl: 'https://picsum.photos/200',
-    category: 'Kategori 1',
+    category: 'Pakaian',
     description: 'Deskripsi produk A',
   ),
   const Product(
@@ -14,7 +14,7 @@ final List<Product> dummyProducts = [
     name: 'Produk B',
     price: 20000,
     imageUrl: 'https://picsum.photos/201',
-    category: 'Kategori 2',
+    category: 'Sepatu',
     description: 'Deskripsi produk B',
   ),
   const Product(
@@ -22,7 +22,7 @@ final List<Product> dummyProducts = [
     name: 'Produk C',
     price: 30000,
     imageUrl: 'https://picsum.photos/202',
-    category: 'Kategori 3',
+    category: 'Aksesoris',
     description: 'Deskripsi produk C',
   ),
   const Product(
@@ -30,7 +30,7 @@ final List<Product> dummyProducts = [
     name: 'Produk D',
     price: 40000,
     imageUrl: 'https://picsum.photos/203',
-    category: 'Kategori 4',
+    category: 'Pakaian',
     description: 'Deskripsi produk D',
   ),
 ];
