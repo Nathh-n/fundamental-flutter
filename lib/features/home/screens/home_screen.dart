@@ -81,62 +81,64 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text('Product Catalog Dashboard'),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Row(
-              children: [
-                SummaryCard(
-                  label: 'Total Produk',
-                  value: '${_products.length}',
-                  icon: Icons.inventory_2,
-                ),
-                SummaryCard(
-                  label: 'Kategori',
-                  value: '${_products.map((p) => p.category).toSet().length}',
-                  icon: Icons.category,
-                ),
-              ],
-            ),
-          ),
-          CategoryFilter(
-            categories: ['Semua', ...productCategories],
-            selectedCategory: _selectedCategory,
-            onCategorySelected: (category) {
-              setState(() {
-                _selectedCategory = category;
-              });
-            },
-          ),
-          const SizedBox(height: 12),
-          Expanded(
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                final crossAxisCount = (constraints.maxWidth / 180).floor().clamp(2, 6);
-
-                return GridView.builder(
-                  padding: const EdgeInsets.all(16),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: crossAxisCount,
-                    childAspectRatio: 0.65,
-                    crossAxisSpacing: 12,
-                    mainAxisSpacing: 12,
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                children: [
+                  SummaryCard(
+                    label: 'Total Produk',
+                    value: '${_products.length}',
+                    icon: Icons.inventory_2,
                   ),
-                  itemCount: _filteredProducts.length,
-                  itemBuilder: (context, index) {
-                    final product = _filteredProducts[index];
-                    return ProductGridItem(
-                      product: product,
-                      onEdit: () => _openEditProductForm(product),
-                      onDelete: () => _confirmDelete(product),
-                    );
-                  },
-                );
+                  SummaryCard(
+                    label: 'Kategori',
+                    value: '${_products.map((p) => p.category).toSet().length}',
+                    icon: Icons.category,
+                  ),
+                ],
+              ),
+            ),
+            CategoryFilter(
+              categories: ['Semua', ...productCategories],
+              selectedCategory: _selectedCategory,
+              onCategorySelected: (category) {
+                setState(() {
+                  _selectedCategory = category;
+                });
               },
             ),
-          ),
-        ],
+            const SizedBox(height: 12),
+            Expanded(
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final crossAxisCount = (constraints.maxWidth / 180).floor().clamp(2, 6);
+
+                  return GridView.builder(
+                    padding: const EdgeInsets.all(16),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: crossAxisCount,
+                      childAspectRatio: 0.65,
+                      crossAxisSpacing: 12,
+                      mainAxisSpacing: 12,
+                    ),
+                    itemCount: _filteredProducts.length,
+                    itemBuilder: (context, index) {
+                      final product = _filteredProducts[index];
+                      return ProductGridItem(
+                        product: product,
+                        onEdit: () => _openEditProductForm(product),
+                        onDelete: () => _confirmDelete(product),
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _openAddProductForm,
