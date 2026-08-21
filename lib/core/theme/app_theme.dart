@@ -13,7 +13,7 @@ class AppTheme {
         seedColor: primaryBlue,
         brightness: Brightness.light,
       ),
-      scaffoldBackgroundColor: const Color.fromARGB(255, 254, 254, 254),
+      scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
       appBarTheme: const AppBarTheme(
         backgroundColor: primaryBlue,
         foregroundColor: Colors.white,
