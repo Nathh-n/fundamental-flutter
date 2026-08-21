@@ -95,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   SummaryCard(
                     label: 'Kategori',
-                    value: '${_products.map((p) => p.category).toSet().length}',
+                    value: '${productCategories.length}',
                     icon: Icons.category,
                   ),
                 ],
