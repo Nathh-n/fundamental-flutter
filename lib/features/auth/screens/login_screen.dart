@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../home/screens/home_screen.dart';
+import '../../auth/screens/register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -56,6 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
+                  const Icon(Icons.verified_user_sharp,size: 70, color: Colors.blue,),
                   const SizedBox(height: 16),
                   const Text(
                     'Product Catalog Dashboard',
@@ -104,6 +106,22 @@ class _LoginScreenState extends State<LoginScreen> {
                         Icon(Icons.login),
                       ],
                     )
+                  ),
+                  const SizedBox(height: 16,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('Belum punya akun?'),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const RegisterScreen()),
+                          );
+                        },
+                        child: const Text('Daftar'),
+                      ),
+                    ],
                   ),
                 ],
               ),
