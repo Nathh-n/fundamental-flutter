@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:apli/core/utils/currency_formatter.dart';
+
 import '../models/product_model.dart';
 import '../screens/product_detail_screen.dart';
 
@@ -8,7 +10,7 @@ class ProductCard extends StatelessWidget {
   const ProductCard({super.key, required this.product});
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return ListTile(
       leading: Image.network(
         product.imageUrl,
@@ -17,7 +19,7 @@ class ProductCard extends StatelessWidget {
         fit: BoxFit.cover,
       ),
       title: Text(product.name),
-      subtitle: Text('Harga: Rp ${product.price}'),
+      subtitle: Text('Harga: ${formatRupiah(product.price)}'),
       onTap: () {
         Navigator.push(
           context,

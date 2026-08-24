@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:apli/core/utils/currency_formatter.dart';
+
 import '../models/product_model.dart';
 
 class ProductGridItem extends StatelessWidget {
@@ -47,7 +49,7 @@ class ProductGridItem extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  Text('Rp. ${product.price}'),
+                  Text(formatRupiah(product.price)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -56,7 +58,11 @@ class ProductGridItem extends StatelessWidget {
                         onPressed: onEdit,
                       ),
                       IconButton(
-                        icon: const Icon(Icons.delete, size: 20, color: Colors.red),
+                        icon: const Icon(
+                          Icons.delete,
+                          size: 20,
+                          color: Colors.red,
+                        ),
                         onPressed: onDelete,
                       ),
                     ],

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:apli/core/utils/currency_formatter.dart';
+
 import '../models/product_model.dart';
 
 class ProductDetailScreen extends StatelessWidget {
@@ -28,7 +30,7 @@ class ProductDetailScreen extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              'Rp ${product.price}',
+              formatRupiah(product.price),
               style: const TextStyle(fontSize: 20, color: Colors.blue),
             ),
             const SizedBox(height: 8),
@@ -37,10 +39,7 @@ class ProductDetailScreen extends StatelessWidget {
               style: const TextStyle(fontSize: 16, color: Colors.grey),
             ),
             const SizedBox(height: 8),
-            Text(
-              product.description,
-              style: const TextStyle(fontSize: 16),
-            ),
+            Text(product.description, style: const TextStyle(fontSize: 16)),
           ],
         ),
       ),

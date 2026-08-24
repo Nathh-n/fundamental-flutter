@@ -1,4 +1,8 @@
+import 'package:apli/core/utils/currency_input_formatter.dart';
+import 'package:apli/core/utils/currency_formatter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import '../models/product_model.dart';
 import '../../../core/constants/categories.dart';
 
@@ -26,9 +30,17 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
   void initState() {
     super.initState();
     _nameController = TextEditingController(text: widget.product?.name ?? '');
-    _priceController = TextEditingController(text: widget.product?.price.toString() ?? '');
-    _imageUrlController = TextEditingController(text: widget.product?.imageUrl ?? '');
-    _descriptionController = TextEditingController(text: widget.product?.description ?? '');
+    _priceController = TextEditingController(
+      text: widget.product == null
+          ? ''
+          : formatCurrencyNumber(widget.product!.price),
+    );
+    _imageUrlController = TextEditingController(
+      text: widget.product?.imageUrl ?? '',
+    );
+    _descriptionController = TextEditingController(
+      text: widget.product?.description ?? '',
+    );
     _selectedCategory = widget.product?.category ?? productCategories.first;
   }
 
@@ -44,10 +56,14 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
   void _submit() {
     if (!_formKey.currentState!.validate()) return;
 
+    final cleanPrice = _priceController.text.replaceAll('.', '');
+
     final product = Product(
-      id: widget.product?.id ?? DateTime.now().millisecondsSinceEpoch.toString(),
+      id:
+          widget.product?.id ??
+          DateTime.now().millisecondsSinceEpoch.toString(),
       name: _nameController.text,
-      price: double.parse(_priceController.text),
+      price: int.parse(cleanPrice),
       imageUrl: _imageUrlController.text,
       category: _selectedCategory,
       description: _descriptionController.text,
@@ -73,17 +89,26 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                 TextFormField(
                   controller: _nameController,
                   decoration: const InputDecoration(labelText: 'Nama Produk'),
-                  validator: (value) =>
-                      (value == null || value.isEmpty) ? 'Nama wajib diisi' : null,
+                  validator: (value) => (value == null || value.isEmpty)
+                      ? 'Nama wajib diisi'
+                      : null,
                 ),
                 const SizedBox(height: 12),
                 TextFormField(
                   controller: _priceController,
                   decoration: const InputDecoration(labelText: 'Harga'),
                   keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    CurrencyInputFormatter(),
+                  ],
                   validator: (value) {
-                    if (value == null || value.isEmpty) return 'Harga wajib diisi';
-                    if (int.tryParse(value) == null) return 'Harga harus berupa angka';
+                    if (value == null || value.isEmpty) {
+                      return 'Harga wajib diisi';
+                    }
+                    if (int.tryParse(value.replaceAll('.', '')) == null) {
+                      return 'Harga harus berupa angka';
+                    }
                     return null;
                   },
                 ),
@@ -92,10 +117,12 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                   initialValue: _selectedCategory,
                   decoration: const InputDecoration(labelText: 'Kategori'),
                   items: productCategories
-                      .map((category) => DropdownMenuItem(
-                            value: category,
-                            child: Text(category),
-                          ))
+                      .map(
+                        (category) => DropdownMenuItem(
+                          value: category,
+                          child: Text(category),
+                        ),
+                      )
                       .toList(),
                   onChanged: (value) {
                     setState(() {
@@ -107,8 +134,9 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                 TextFormField(
                   controller: _imageUrlController,
                   decoration: const InputDecoration(labelText: 'URL Gambar'),
-                  validator: (value) =>
-                      (value == null || value.isEmpty) ? 'URL gambar wajib diisi' : null,
+                  validator: (value) => (value == null || value.isEmpty)
+                      ? 'URL gambar wajib diisi'
+                      : null,
                 ),
                 const SizedBox(height: 12),
                 TextFormField(
@@ -121,7 +149,9 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: _submit,
-                    child: Text(_isEditMode ? 'Simpan Perubahan' : 'Tambah Produk'),
+                    child: Text(
+                      _isEditMode ? 'Simpan Perubahan' : 'Tambah Produk',
+                    ),
                   ),
                 ),
               ],
