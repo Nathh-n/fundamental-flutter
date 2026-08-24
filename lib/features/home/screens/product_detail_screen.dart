@@ -41,15 +41,6 @@ class ProductDetailScreen extends StatelessWidget {
               product.description,
               style: const TextStyle(fontSize: 16),
             ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Produk berhasil ditambahkan ke keranjang')),
-                );
-              },
-              child: const Text('Tambahkan ke Keranjang'),
-            ),
           ],
         ),
       ),

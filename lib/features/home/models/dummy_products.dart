@@ -3,7 +3,7 @@ import 'product_model.dart';
 final List<Product> dummyProducts = [
   const Product(
     id: '1',
-    name: 'Produk A',
+    name: 'Produk Abcdefghijklmno',
     price: 10000,
     imageUrl: 'https://picsum.photos/200',
     category: 'Pakaian',
@@ -30,6 +30,14 @@ final List<Product> dummyProducts = [
     name: 'Produk D',
     price: 40000,
     imageUrl: 'https://picsum.photos/203',
+    category: 'Pakaian',
+    description: 'Deskripsi produk D',
+  ),
+  const Product(
+    id: '5',
+    name: 'Produk E',
+    price: 40.000,
+    imageUrl: 'https://picsum.photos/204',
     category: 'Pakaian',
     description: 'Deskripsi produk D',
   ),

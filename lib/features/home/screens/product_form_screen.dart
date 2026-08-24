@@ -47,7 +47,7 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
     final product = Product(
       id: widget.product?.id ?? DateTime.now().millisecondsSinceEpoch.toString(),
       name: _nameController.text,
-      price: int.parse(_priceController.text),
+      price: double.parse(_priceController.text),
       imageUrl: _imageUrlController.text,
       category: _selectedCategory,
       description: _descriptionController.text,

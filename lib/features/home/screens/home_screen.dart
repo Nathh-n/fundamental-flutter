@@ -6,6 +6,7 @@ import '../widgets/summary_card.dart';
 import '../widgets/category_filter.dart';
 import '../../../core/constants/categories.dart';
 import 'product_form_screen.dart';
+import '../screens/product_detail_screen.dart ';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -91,12 +92,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   SummaryCard(
                     label: 'Total Produk',
                     value: '${_products.length}',
-                    icon: Icons.inventory_2,
+                    icon: Icons.inventory_outlined,
                   ),
                   SummaryCard(
                     label: 'Kategori',
                     value: '${productCategories.length}',
-                    icon: Icons.category,
+                    icon: Icons.category_outlined,
                   ),
                 ],
               ),
@@ -110,12 +111,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 });
               },
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 8),
             Expanded(
               child: LayoutBuilder(
                 builder: (context, constraints) {
                   final crossAxisCount = (constraints.maxWidth / 180).floor().clamp(2, 6);
-
                   return GridView.builder(
                     padding: const EdgeInsets.all(16),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -129,6 +129,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       final product = _filteredProducts[index];
                       return ProductGridItem(
                         product: product,
+                        onTap: (){
+                          Navigator.push(
+                            context, MaterialPageRoute(builder: (context) => ProductDetailScreen(product: product)),
+                            );
+                        },
                         onEdit: () => _openEditProductForm(product),
                         onDelete: () => _confirmDelete(product),
                       );
